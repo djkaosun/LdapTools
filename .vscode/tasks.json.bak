@@ -1,0 +1,54 @@
+{
+    // See https://go.microsoft.com/fwlink/?LinkId=733558
+    // for the documentation about the tasks.json format
+    //
+    // See https://qiita.com/hibara/items/fa66c3241293b7d43eae
+    "version": "2.0.0",
+    "tasks": [
+        {
+            //【重要】タスク名を記載する（後述のlaunch.jsonと連動します）
+            "label": "build debug",
+            // プログラムの種類
+            "type": "shell",
+            // ビルドツール（MSBuild.exe）の位置。以下の例ではv.4.0を使うのでその実行ファイルパスを指定します。
+            //"command": "msbuild",
+            "command": "C:\\Windows\\Microsoft.NET\\Framework\\v4.0.30319\\MSBuild.exe",
+            // MSBuild.exeへの引数を指定します。
+            "args": [ 
+                // プロジェクトファイル（*.slnなど）のあるパスを指定します。
+                "${workspaceFolder}/LdapToolsWpf.sln",
+                // Ask msbuild to generate full paths for file names.
+                "/p:GenerateFullPaths=true",
+                // プロジェクトのビルドに使用するツールセットのバージョン
+                "/p:toolsVersion=4.6",
+                // デバッグビルド
+                "/p:Configuration=Debug",
+                // プラットフォーム。vsdbg は x64 のみに対応
+                "/p:Platform=x64",
+                // ターゲット
+                "/t:build",
+                // Do not generate summary otherwise it leads to duplicate errors in Problems panel
+                "/consoleloggerparameters:NoSummary"
+            ],
+            // タスクのグループを設定します。この場合は一つだけなので適当の「build」としました。
+            "group": "build",
+            // タスクの出力がユーザーインターフェースでどのように処理されるかを定義します。
+            "presentation": {
+                // 出力を表示する統合ターミナルが常に表示され、タスクの実行ごとに新しいターミナルが作成されます。
+                "reveal": "always",
+                // 実行後にターミナルウィンドウにフォーカスを移します（
+                "focus": true,
+            },
+            // ビルドにエラーが発生した場合に、その出力から問題点を検出する際に使用する「プロブレムマッチャー」を指定する。
+            // ここではC#のコードなので、"$msCompile"が指定されています。
+            "problemMatcher": "$msCompile",
+            "options": {
+                "shell": {
+                    //to execute task on the "cmd.exe" independent of default shell.
+                    "executable": "cmd.exe",
+                    "args": ["/d", "/c"]
+                }
+            }
+        }
+    ]
+}

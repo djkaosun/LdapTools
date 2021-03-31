@@ -1,0 +1,40 @@
+{
+    // IntelliSense を使用して利用可能な属性を学べます。
+    // 既存の属性の説明をホバーして表示します。
+    // 詳細情報は次を確認してください: https://go.microsoft.com/fwlink/?linkid=830387
+    //
+    // See https://qiita.com/hibara/items/fa66c3241293b7d43eae
+    "version": "0.2.0",
+    "configurations": [
+        {
+            // デバッグ時のウィンドウから実行を選択する際のメニュー項目名になります。
+            "name": ".NET Launch (Debug)",
+            // プログラムの種類は「Desktop CLR debugger」を指定します。
+            //"type": "clr",
+            "type": "coreclr",
+            // 起動設定のリクエストの種類です。ここでは単純に「launch」です。
+            "request": "launch",
+            // 起動前のタスクを指定します。「tasks.json」内「label」で指定した名前を記載します。
+            "preLaunchTask": "build debug",
+            // 起動する（ビルドされた）実行ファイルパスを指定します。
+            "program": "${workspaceFolder}/LdapTools/bin/x64/Debug/net46/LdapTools.exe",
+            // 上記の実行ファイルに付加する引数を以下に記載します。
+            "args": [],
+            // 作業ファイルのあるディレクトリーパスを指定します。
+            "cwd": "${workspaceFolder}/LdapTools/bin/x64/Debug/",
+            // For more information about the 'console' field, see https://github.com/OmniSharp/omnisharp-vscode/blob/master/debugger-launchjson.md#console-terminal-window
+            // 上記URLにあるとおり、コンソールは、VSCode内のコンソールに表示されるように指定します。
+            "console": "internalConsole",
+            // デバッグ中にデバッグコンソール表示をどうするかを指定します。ここではスタートと同時に表示としています。
+            "internalConsoleOptions": "openOnSessionStart",
+            // 
+            "stopAtEntry": false
+        }/*,
+        {
+            "name": ".NET Core Attach",
+            "type": "coreclr",
+            "request": "attach",
+            "processId": "${command:pickProcess}"
+        }//*/
+    ]
+}
