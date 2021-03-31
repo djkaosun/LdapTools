@@ -48,6 +48,43 @@
                     "args": ["/d", "/c"]
                 }
             }//*/
+        },
+        {
+            // タスク名
+            "label": "build release",
+            // プログラムの種類
+            "type": "process",
+            // ビルド コマンド
+            "command": "dotnet",
+            "args": [
+                "build",
+                // プロジェクトファイル（*.slnなど）のあるパスを指定します。
+                "${workspaceFolder}/LdapTools.sln",
+                // Ask msbuild to generate full paths for file names.
+                "/p:GenerateFullPaths=true",
+                // プロジェクトのビルドに使用するツールセットのバージョン
+                "/p:toolsVersion=4.6",
+                // デバッグビルド
+                "/p:Configuration=Release",
+                // プラットフォーム。
+                "/p:Platform=\"Any CPU\"",
+                // ターゲット
+                "/t:build",
+                // Do not generate summary otherwise it leads to duplicate errors in Problems panel
+                "/consoleloggerparameters:NoSummary"
+            ],
+            // タスクのグループを設定します。この場合は一つだけなので適当の「build」としました。
+            "group": "build",
+            // タスクの出力がユーザーインターフェースでどのように処理されるかを定義します。
+            "presentation": {
+                // 出力を表示する統合ターミナルが常に表示され、タスクの実行ごとに新しいターミナルが作成されます。
+                "reveal": "always",
+                // 実行後にターミナルウィンドウにフォーカスを移します（
+                "focus": true,
+            },
+            // ビルドにエラーが発生した場合に、その出力から問題点を検出する際に使用する「プロブレムマッチャー」を指定する。
+            // ここではC#のコードなので、"$msCompile"が指定されています。
+            "problemMatcher": "$msCompile"
         }
     ]
 }
